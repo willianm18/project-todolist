@@ -2,4 +2,8 @@
 
 const app = require("./app")
 
-app.listen(3333, () => console.log('servidor rodando na porta 3333')) //porta para executar o express sempre fica no final da aplicacao
+require('dotenv').config()
+
+const PORT = process.env.PORT 
+
+app.listen(PORT, () => console.log('servidor rodando na porta ${PORT}')) //porta para executar o express sempre fica no final da aplicacao

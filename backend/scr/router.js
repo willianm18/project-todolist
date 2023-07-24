@@ -1,8 +1,12 @@
 //é importante organizar os arquivos, com isso foi criado um novo arquivo apenas para rotas
 
 const express = require('express')
+const taskController = require('./controllers/taskController')
+
 const router = express()
 
-router.get('/task', (request, response) => response.status(200).send('O router esta funcionando')) //sempre usa req e res na variavel
+
+
+router.get('/tasks', taskController.getAll)
 
 module.exports=router // exporta o router
