@@ -1,4 +1,5 @@
 const mysql = require('mysql2/promise') // promise para pegar a versao mais atualizada do sql
+require('dotenv').config()
 
 const connection = mysql.createPool({ //responsavel pelas informações do banco de dados
     host: process.env.MYSQL_HOST,
