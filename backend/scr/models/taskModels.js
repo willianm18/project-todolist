@@ -12,20 +12,23 @@ const createTask = async(task) => {
     const dateNow = new Date(Date.now()).toLocaleDateString()
 
     const [createTask] = await connection.execute('INSERT INTO todolist(title,status, datacreate) VALUES (?,?,?)',[title, 'pendente',dateNow])
-    return createTask
+    return {insertId: createTask.insertId}
 }
 
 const deleteTask = async(id) => {
-    const idtask = id.id;
-    console.log(idtask)
-    const dateNow = new Date(Date.now()).toLocaleDateString()
+    const deleteTask = await connection.execute('DELETE FROM todolist WHERE id = ?', [id])
+    return deleteTask
+}
 
-    const [deleteTask] = await connection.execute('DELETE FROM todolist WHERE id = ?', [idtask])
+const updateTask = async(id,task) => {
+    const {title, status} = task
+    const deleteTask = await connection.execute('UPDATE todolist SET title = ?, status = ? WHERE id = ?',[title, status, id])
     return deleteTask
 }
 
 module.exports = { //usado objeto pois será exportado mais que uma query sql
     getAll,
     createTask,
-    deleteTask
+    deleteTask,
+    updateTask
 }
